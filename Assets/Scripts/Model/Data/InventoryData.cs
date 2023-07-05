@@ -12,7 +12,6 @@ public class InventoryData
     public delegate void OnInventoryChanged(string id, int value);
 
     public OnInventoryChanged OnChanged;
-
     
     public void Add(string id, int value)
     {
@@ -24,7 +23,7 @@ public class InventoryData
          return;
         }
 
-       var isFull = _inventory.Count >= DefsFacade.I.Player.InventorySize;
+        var isFull = _inventory.Count >= DefsFacade.I.Player.InventorySize;
         if (itemDef.HasTag(ItemTag.Stackable))
         {
             AddToStack(id, value);
@@ -34,7 +33,6 @@ public class InventoryData
             AddNonStick(id, value);
         }
         OnChanged?.Invoke(id, Count(id));
-  
     }
     public InventoryItemData[] GetAll(params ItemTag[] tags)
     {

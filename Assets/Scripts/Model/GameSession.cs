@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -25,13 +24,12 @@ public class GameSession : MonoBehaviour
 
     private void Start()
     {
-
-
-
         var existsSession = GetExistsSession();
         if (existsSession != null)
         {
             existsSession.StartSession(_defaultCheckPoint);
+
+            QuickInventory?.Subscribe();
             Destroy(gameObject);
         }
         else
@@ -67,7 +65,8 @@ public class GameSession : MonoBehaviour
     private void InitModels()
     {
         QuickInventory = new QuickInventoryModel(_data);
-        _trash.Retain(QuickInventory);
+        QuickInventory.Subscribe();
+        //_trash.Retain(QuickInventory);
 
         PerksModel = new PerksModel(_data);
         _trash.Retain(PerksModel);
@@ -75,8 +74,8 @@ public class GameSession : MonoBehaviour
         StatsModel = new StatsModel(_data);
         _trash.Retain(StatsModel);
 
-        _data.HP.Value = (int)StatsModel.GetValue(StatId.Hp);
-        _data.MaxHP.Value = (int)StatsModel.GetValue(StatId.MaxHP);
+        //_data.HP.Value = (int)StatsModel.GetValue(StatId.Hp);
+        //_data.MaxHP.Value = (int)StatsModel.GetValue(StatId.MaxHP); 
     }
 
     private void LoadUIs()
@@ -107,7 +106,6 @@ public class GameSession : MonoBehaviour
                 return gameSession;
         }
         return null;
-
     }
 
     public void Save()
@@ -120,6 +118,7 @@ public class GameSession : MonoBehaviour
         //  _data = _save.Clone();
         //_data.HP = tmp.HP;
         _data.MaxHP = tmp.MaxHP;
+        _data.HP = _data.MaxHP;
         _trash.Dispose();
     }
 

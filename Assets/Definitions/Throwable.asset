@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Throwable
   m_EditorClassIdentifier: 
   _collection:
-  - _id: Arrow
+  - _id: RangeAttack
     _projectile: {fileID: 4499111912073004687, guid: b941990145fbdd04f8cbae28e33ba38d, type: 3}
   - _id: Wind
     _projectile: {fileID: 4499111912073004687, guid: bb2e2936dbeeb894fb7487b8b4bb34b7, type: 3}

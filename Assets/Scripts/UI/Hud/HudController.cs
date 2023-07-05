@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HudController : MonoBehaviour
@@ -12,13 +10,36 @@ public class HudController : MonoBehaviour
     private readonly CompositeDisposable _trash = new CompositeDisposable();
 
 
+    private HealthComponent healthComponent;
+
     private void Start()
     {
+        StartCoroutine(GetLinks());
+
         _session = FindObjectOfType<GameSession>();
-        _trash.Retain(_session.Data.HP.SubscribeAndInvoke(OnHealthChanged));
+        //_trash.Retain(_session.Data.HP.SubscribeAndInvoke(OnHealthChanged));
         _trash.Retain(_session.PerksModel.Subscribe(OnPerkChanged));
 
         OnPerkChanged();
+    }
+
+    private IEnumerator GetLinks()
+    {
+        Hero hero = null;
+
+        while (hero == null)
+        {
+            hero = FindObjectOfType<Hero>();
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        while (healthComponent == null)
+        {
+            healthComponent = hero.GetComponent<HealthComponent>();
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        healthComponent.OnHealthChange += HealthChanged;
     }
 
     private void OnPerkChanged()
@@ -34,10 +55,11 @@ public class HudController : MonoBehaviour
         _currentPerk.gameObject.SetActive(hasPerk);
     }
 
-    private void OnHealthChanged(int newValue, int oldValue)
+
+
+    private void HealthChanged(int health, int maxHealth)
     {
-        var maxHealth = _session.StatsModel.GetValue(StatId.Hp);
-        var value = (float)newValue / maxHealth;
+        var value = (float)health / maxHealth;
         _healthBar.SetProgress(value);
     }
 
@@ -54,6 +76,14 @@ public class HudController : MonoBehaviour
     {
         WindowUtils.CreateWindow("UI/PlayerStatsWindow");
     }
-   
 
+
+    /////////////////// OBSOLETE  //////////////////////////////////
+
+    private void OnHealthChanged(int newValue, int oldValue)
+    {
+        var maxHealth = _session.StatsModel.GetValue(StatId.Hp);
+        var value = (float)newValue / maxHealth;
+        _healthBar.SetProgress(value);
+    }
 }

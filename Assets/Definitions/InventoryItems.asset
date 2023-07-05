@@ -26,10 +26,10 @@ MonoBehaviour:
     _icon: {fileID: 21300000, guid: ebfc4b6fcb6ae1f4daf1ec5795919e43, type: 3}
     _tags: 010000000000000002000000
   - _id: SmallHealthPotion
-    _icon: {fileID: 460529809, guid: e7e2968a00bc8eb4388e058d17eb25ae, type: 3}
+    _icon: {fileID: 460529809, guid: ee8340ddb497a5d4c8654c65b058d065, type: 3}
     _tags: 0300000001000000
   - _id: BigHealthPotion
-    _icon: {fileID: 1926962618, guid: e7e2968a00bc8eb4388e058d17eb25ae, type: 3}
+    _icon: {fileID: 1926962618, guid: ee8340ddb497a5d4c8654c65b058d065, type: 3}
     _tags: 0300000001000000
   - _id: SpeedUpPotion
     _icon: {fileID: 460529809, guid: e7e2968a00bc8eb4388e058d17eb25ae, type: 3}

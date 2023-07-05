@@ -19,7 +19,7 @@ using UnityEngine;
             var healthComponent = target.GetComponent<HealthComponent>();
             if (healthComponent != null)
             {
-                healthComponent.ModifyHealth(_hpDelta);
+                healthComponent.TakeDmg(_hpDelta);
             }
         }
 

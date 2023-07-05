@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6625540572579874308}
   - component: {fileID: 6625540572579874311}
   - component: {fileID: 6625540572579874305}
+  - component: {fileID: 1595383575551414037}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5b99d646babfd794ba22c431e9730604, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5943396, g: 0.5573336, b: 0.5573336, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -242,4 +243,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectToDestroy: {fileID: 6625540572579874310}
-  _state: {fileID: 0}
+  _state: {fileID: 1595383575551414037}
+--- !u!114 &1595383575551414037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6625540572579874310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61d0334a53192d4cad01df365bef7b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: Key

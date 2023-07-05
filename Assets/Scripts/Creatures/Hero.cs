@@ -1,10 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-
 public class Hero : Creature
 {
-
     [SerializeField] private Vector2 _interactionRadius;
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _slamDownVelocity;
@@ -24,6 +22,8 @@ public class Hero : Creature
     [SerializeField] private SpawnComponent _throwSpawner;
     [SerializeField] private ShieldComponent _shield;
 
+    [Header("Particles")]
+    [SerializeField] private ParticleSystem _hitParticles;
 
     private int CoinsCount => _session.Data.Inventory.Count("Coin");
     private int SwordCount => _session.Data.Inventory.Count(SwordId);
@@ -44,8 +44,7 @@ public class Hero : Creature
 
         }
     }
-    [Header("Particles")]
-    [SerializeField] private ParticleSystem _hitParticles;
+
 
     private Collider2D[] _interactionResults = new Collider2D[1];
     private HealthComponent _health;
@@ -83,38 +82,16 @@ public class Hero : Creature
         switch (statId)
         {
             case StatId.Hp:
-                int addedHealth = (int)_session.StatsModel.GetValue(statId);
-                // _session.Data.HP.Value = health;
-                //_health.SetHealth(health);
-                // _session.Save();
-                _health.Initialized(_health.HP + addedHealth, _health.MaxHP + addedHealth);
+                int addedHp = (int)_session.StatsModel.GetValue(statId);
+                _health.IncreaseHp(addedHp);
+                _session.Data.HP.Value = _health.HP;
+                _session.Data.MaxHP.Value = _health.MaxHP;
+                _session.Save();
                 break;
         }
     }
 
-    // private void OnDestroy()
-    // {
-    //   _session.Data.Inventory.OnChanged -= OnInventoryChanged;
-
-    // }
-    // private void OnInventoryChanged(string id, int value)
-    // {
-    //if (id == SwordId)
-    // {
-    //    UpdateHeroWeapon();
-    // }
-    // }
-
-   // public void OnHealthChange(int currentHealth)
-   // {
-    //    _session.Data.HP.Value = currentHealth;
-    //}
-
-
-
     protected override void Update()
-
-
     {
         base.Update();
         var moveToSameDirection = Direction.x * transform.lossyScale.x > 0;
@@ -174,28 +151,9 @@ public class Hero : Creature
     }
 
 
-    public void AddInInventory(string id, int value)
-    {
-        _session.Data.Inventory.Add(id, value);
-    }
-
-    public override void TakeDamage()
-
-    {
-        base.TakeDamage();
-
-        if (CoinsCount > 0)
-        {
-            SpawnCoins();
-        }
-
-
-    }
 
     public void SpawnCoins()
-
     {
-
         var numCoinsToDispose = Mathf.Min(CoinsCount, 5);
         _session.Data.Inventory.Remove("Coin", numCoinsToDispose);
 
@@ -224,7 +182,6 @@ public class Hero : Creature
 
             }
         }
-
     }
 
     public override void UpdateSpriteDirection(Vector2 direction)
@@ -240,20 +197,26 @@ public class Hero : Creature
             transform.localScale = new Vector3(-1 * multiplayer, 2, 2);
         }
     }
+
+
+    ///////////////////  ATTACK////////////////////////////////////
+
     public override void Attack()
-
     {
-
         // if (SwordCount <= 0) return;
         base.Attack();
 
     }
 
+    public override void TakeDamage()
+    {
+        base.TakeDamage();
 
-    //  private void UpdateHeroWeapon()
-    // {
-    //   Animator.runtimeAnimatorController = SwordCount > 0 ? _armed : _unarmed;
-    // }
+        if (CoinsCount > 0)
+        {
+            SpawnCoins();
+        }
+    }
 
     public void OnDoThrow()
     {
@@ -295,6 +258,7 @@ public class Hero : Creature
         _session.Data.Inventory.Remove(throwableId, 1);
     }
 
+
     private void ApplyRangeDamageStat(GameObject projectile)
     {
         var hpModify = projectile.GetComponent<ModifyHealthComponent>();
@@ -312,7 +276,10 @@ public class Hero : Creature
         }
         return damage;
     }
+    ///////////////////////////////////////////////////////
 
+
+    ///////////////////INVENTORY////////////////////////////////////
     public void Throw()
     {
         if (_throwCoolDown.IsReady && SwordCount > 1)
@@ -320,8 +287,6 @@ public class Hero : Creature
             Animator.SetTrigger(ThrowKey);
             _throwCoolDown.Reset();
         }
-
-
     }
 
     bool isStartThrow;
@@ -364,13 +329,7 @@ public class Hero : Creature
         switch (potion.Effect)
         {
             case Effect.AddHp:
-                // _session.Data.HP.Value += (int)potion.Value;
-                // var health = (int)_session.StatsModel.GetValue(StatId.Hp);
-                // _session.Data.HP.Value += (int)potion.Value; 
-                // _health.SetHealth(_session.Data.HP.Value);
-                //_session.Save();
-               // _health.AddedHP = (int)potion.Value;
-               // _health.ModifyHealth(0);
+                _health.AddedHp((int)potion.Value);
                 break;
             case Effect.SpeedUp:
                 _speedUpColldown.Value = _speedUpColldown.RemainingTime + potion.Time;
@@ -381,6 +340,12 @@ public class Hero : Creature
 
         _session.Data.Inventory.Remove(potion.Id, 1);
     }
+    public void AddInInventory(string id, int value)
+    {
+        _session.Data.Inventory.Add(id, value);
+    }
+    ///////////////////////////////////////////////////////
+
 
     private readonly Cooldown _speedUpColldown = new Cooldown();
     private float _additionalSpeed;
@@ -410,14 +375,11 @@ public class Hero : Creature
             if (Rigidbody.transform.localScale.x < 0)
             {
                Rigidbody.AddForce(Vector2.left * DashImpulse, ForceMode2D.Impulse);
-                print(DashImpulse);
             }
             else
             {
                 Rigidbody.AddForce(Vector2.right * DashImpulse, ForceMode2D.Impulse);
-                print(DashImpulse);
-            }
-  
+            }  
         }
     }
 
@@ -428,10 +390,7 @@ public class Hero : Creature
     }
 
 
-    //public void StartThrowing()
-    //{
-       // _superThrowCooldown.Reset();
-   //}
+
 
 
     public void PerformThrowling()
@@ -457,8 +416,37 @@ public class Hero : Creature
         }
     }
 
-    
 
-   
+
+    //  private void UpdateHeroWeapon()
+    // {
+    //   Animator.runtimeAnimatorController = SwordCount > 0 ? _armed : _unarmed;
+    // }
+
+    //public void StartThrowing()
+    //{
+    // _superThrowCooldown.Reset();
+    //}
+
+
+    // private void OnDestroy()
+    // {
+    //   _session.Data.Inventory.OnChanged -= OnInventoryChanged;
+
+    // }
+    // private void OnInventoryChanged(string id, int value)
+    // {
+    //if (id == SwordId)
+    // {
+    //    UpdateHeroWeapon();
+    // }
+    // }
+
+    // public void OnHealthChange(int currentHealth)
+    // {
+    //    _session.Data.HP.Value = currentHealth;
+    //}
+
+
 }
 

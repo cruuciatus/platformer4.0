@@ -34,7 +34,6 @@ public struct StatLevelDef
 public enum StatId
 {
     Hp,
-    MaxHP,
     Speed,
     RangeDamage,
      CriticalDamage

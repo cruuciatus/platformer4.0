@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class StatsModel : IDisposable
 {
@@ -39,7 +36,7 @@ public class StatsModel : IDisposable
         _data.Levels.LevelUp(id);
 
         OnChanged?.Invoke();
-       // OnUpgraded?.Invoke(id);
+        OnUpgraded?.Invoke(id);
     }
 
     public float GetValue(StatId id, int level = -1)

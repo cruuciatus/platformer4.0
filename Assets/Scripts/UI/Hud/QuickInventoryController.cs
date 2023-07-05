@@ -22,16 +22,13 @@ public class QuickInventoryController : MonoBehaviour
         _dataGroup = new DataGroup<InventoryItemData, InventoryItemWidget>(_prefab, _container);
         _session = FindObjectOfType<GameSession>();
         _trash.Retain(_session.QuickInventory.Subscribe(Rebuild));
+       // _session.Data.Inventory.onAdd += Rebuild;
         Rebuild();
     }
-    private void Update()
-    {
-        var inventory = _session.QuickInventory.Inventory;
-        _dataGroup.SetData(inventory);
-    }
+
+
     private void Rebuild()
     {
-
         var inventory = _session.QuickInventory.Inventory;
         _dataGroup.SetData(inventory);
     }

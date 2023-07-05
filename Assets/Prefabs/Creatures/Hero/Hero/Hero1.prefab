@@ -206,7 +206,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -875648247
   m_SortingLayer: 2
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 2f77fc168d459c64bb5a167dab21ddf3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _invertScale: 0
-  _speed: 5
+  _speed: 2
   _jumpSpeed: 6
   _damageVelocity: 0
   _groundLayer:
@@ -322,8 +322,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00056856766, y: -0.10857383}
-  m_Size: {x: 0.13229164, y: 0.26428765}
+  m_Offset: {x: -0.00056856766, y: -0.10567663}
+  m_Size: {x: 0.13229164, y: 0.25849324}
   m_Direction: 0
 --- !u!95 &1277134671221156872
 Animator:
@@ -357,35 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b77cee75a891fc418084043811ba770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hp: 0
-  _maxHP: 0
-  _onDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1277134671221156979}
-        m_TargetAssemblyTypeName: Hero, Assembly-CSharp
-        m_MethodName: TakeDamage
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1938578954}
-        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Hurt
-          m_BoolArgument: 0
-        m_CallState: 2
+  _hp: 5
+  _maxHP: 5
   _onDie:
     m_PersistentCalls:
       m_Calls:
@@ -401,24 +374,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _onHeal:
-    m_PersistentCalls:
-      m_Calls: []
   _onChange:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1277134671221156979}
-        m_TargetAssemblyTypeName: Hero, Assembly-CSharp
-        m_MethodName: OnHealthChange
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _immune: 0
 --- !u!114 &34039742330027862
 MonoBehaviour:
@@ -5759,7 +5717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 2875926310120794263}
-  _prefab: {fileID: 3753716660843262594, guid: a4eb653bec575e34c920bcff66f9d965, type: 3}
+  _prefab: {fileID: 4499111912073004687, guid: b941990145fbdd04f8cbae28e33ba38d, type: 3}
 --- !u!1 &5300407108800083983
 GameObject:
   m_ObjectHideFlags: 0

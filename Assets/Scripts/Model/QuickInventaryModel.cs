@@ -29,8 +29,11 @@ public class QuickInventoryModel : IDisposable
     public QuickInventoryModel(PlayerData data)
     {
         _data = data;
-
         Inventory = _data.Inventory.GetAll(ItemTag.Usable);
+    }
+
+    public void Subscribe()
+    {
         _data.Inventory.OnChanged += OnChangedInventory;
     }
 

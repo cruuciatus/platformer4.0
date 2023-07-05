@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2218350179048839379}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.074, y: -0.42, z: 0}
+  m_LocalPosition: {x: -0.12, y: -0.4, z: 0}
   m_LocalScale: {x: 2.08544, y: 1.7905233, z: 0.95134336}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6996069774997688275}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.074, y: -0.336, z: 0}
+  m_LocalPosition: {x: -0.12, y: -0.32, z: 0}
   m_LocalScale: {x: 2.08544, y: 1.7905233, z: 0.95134336}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -226,9 +226,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6065955677766722663}
   - component: {fileID: 6853408862402550610}
-  - component: {fileID: 7169524233177405399}
   - component: {fileID: 3603748327006972181}
   - component: {fileID: 8740646269681498407}
+  - component: {fileID: 867823646048438235}
   m_Layer: 0
   m_Name: TorchCheckPoint
   m_TagString: Untagged
@@ -243,9 +243,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7863775354358432847}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -131.71, y: 6.254, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2218350179048839340}
@@ -265,8 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f1036be203a61b4fb17121a618a9691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: level1-checkpoint1
-  _heroSpawner: {fileID: 7169524233177405399}
+  _id: level2-checkpoint2
+  _heroSpawner: {fileID: 867823646048438235}
   _setChecked:
     m_PersistentCalls:
       m_Calls:
@@ -321,20 +321,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &7169524233177405399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7863775354358432847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beaed1d27c1d2414eb5414e219f42b67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 6065955677766722663}
-  _prefab: {fileID: 1277134671221156991, guid: b2aca5ee8027cbe4da0049ef1b16bb6c, type: 3}
 --- !u!58 &3603748327006972181
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -382,3 +368,17 @@ MonoBehaviour:
   _layer:
     serializedVersion: 2
     m_Bits: 4096
+--- !u!114 &867823646048438235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7863775354358432847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0086ecbc9be53684a833d307f67e4e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 6065955677766722663}
+  _prefab: {fileID: 1277134671221156991, guid: b2aca5ee8027cbe4da0049ef1b16bb6c, type: 3}

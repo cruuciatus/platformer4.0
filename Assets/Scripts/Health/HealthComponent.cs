@@ -61,6 +61,8 @@ public class HealthComponent : MonoBehaviour
             _hp = MaxHP;
         else
             _hp = tmp;
+        _onChange?.Invoke(_hp);
+        OnHealthChange?.Invoke(HP, MaxHP);
     }
 
 #if UNITY_EDITOR

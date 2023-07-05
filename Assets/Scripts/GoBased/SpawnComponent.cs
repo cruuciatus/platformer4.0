@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SpawnComponent : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
-    [SerializeField] private GameObject _prefab;
+    [SerializeField] protected Transform _target;
+    [SerializeField] protected GameObject _prefab;
 
 
     [ContextMenu("Spawn")]
@@ -17,7 +17,7 @@ public class SpawnComponent : MonoBehaviour
 
     }
 
-    public GameObject SpawnInstance()
+    public virtual GameObject SpawnInstance()
     {
         var instantiate = Instantiate(_prefab, _target.position, Quaternion.identity);
         instantiate.transform.localScale = _target.lossyScale;
